@@ -31,3 +31,4 @@
 /home/amanda/development/BussHållplatsTid/BussHållplatsTid/obj/Debug/net10.0/BussHållplatsTid.pdb
 /home/amanda/development/BussHållplatsTid/BussHållplatsTid/obj/Debug/net10.0/BussHållplatsTid.genruntimeconfig.cache
 /home/amanda/development/BussHållplatsTid/BussHållplatsTid/obj/Debug/net10.0/ref/BussHållplatsTid.dll
+/home/amanda/development/BussHållplatsTid/BussHållplatsTid/obj/Debug/net10.0/BussHållplatsTid.sourcelink.json
