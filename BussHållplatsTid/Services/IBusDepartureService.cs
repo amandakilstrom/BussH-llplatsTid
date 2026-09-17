@@ -4,6 +4,6 @@ namespace BussHållplatsTid.Services
 {
     public interface IBusDepartureService
     {
-        Task<List<Departure>> GetDeparturesAsync();
+        Task<List<Departure>> GetDeparturesAsync(string? direction = null);
     }
 }

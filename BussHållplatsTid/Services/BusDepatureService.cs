@@ -13,7 +13,7 @@ public class BusDepartureService : IBusDepartureService
         _configuration = configuration;
     }
 
-    public async Task<List<Departure>> GetDeparturesAsync()
+    public async Task<List<Departure>> GetDeparturesAsync(string? direction = null)
     {
         var apiKey = _configuration["ResRobot:ApiKey"];
         var stopId = _configuration["ResRobot:StopId"];
@@ -21,6 +21,15 @@ public class BusDepartureService : IBusDepartureService
         var url = $"departureBoard?id={stopId}&format=json&accessId={apiKey}";
 
         var response = await _httpClient.GetFromJsonAsync<DepartureBoardResponse>(url);
-        return response?.Departure ?? new List<Departure>();
+        var departures = response?.Departure ?? new List<Departure>();
+
+        if (!string.IsNullOrEmpty(direction))
+        {
+            departures = departures
+                .Where(d => d.Direction.Contains(direction, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+
+        return departures;
     }
 }

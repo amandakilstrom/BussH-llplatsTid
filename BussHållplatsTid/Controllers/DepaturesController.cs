@@ -15,9 +15,9 @@ public class DeparturesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetDepartures()
+    public async Task<IActionResult> GetDepartures([FromQuery] string? direction = null)
     {
-        var departures = await _departureService.GetDeparturesAsync();
+        var departures = await _departureService.GetDeparturesAsync(direction);
         return Ok(departures);
     }
 }
