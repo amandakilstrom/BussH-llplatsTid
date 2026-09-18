@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BussHållplatsTid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15d163626e5bfe6e939a5437c738fcec61708661")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4911a49bfdd0c6bcd454515b0480fd8092bddb19")]
 [assembly: System.Reflection.AssemblyProductAttribute("BussHållplatsTid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BussHållplatsTid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
