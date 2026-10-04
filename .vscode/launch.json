@@ -1,15 +1,32 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "C#: BussHållplatsTid Debug",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}/BussHållplatsTid/BussHållplatsTid.csproj"
-        }
-
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/BussHållplatsTid/bin/Debug/net10.0/BussHållplatsTid.dll",
+      "cwd": "${workspaceFolder}/BussHållplatsTid",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5196"
+      },
+      "console": "internalConsole"
+    },
+    {
+      "name": "Angular",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npx ng serve --proxy-config proxy.conf.json",
+      "cwd": "${workspaceFolder}/frontend"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "API + Angular",
+      "configurations": [".NET API", "Angular"],
+      "stopAll": true
+    }
+  ]
 }
