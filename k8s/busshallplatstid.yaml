@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: busshallplatstid
-          image: docker.io/library/busshallplatstid:v1
+          image: docker.io/library/busshallplatstid:v3
           imagePullPolicy: Never   # imagen importeras manuellt, ingen registry
           ports:
             - containerPort: 8080
