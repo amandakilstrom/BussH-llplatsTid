@@ -16,9 +16,12 @@
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  cursor: none;
   overflow: hidden;
   box-sizing: border-box;
+
+  @media (pointer: coarse) {
+    * { cursor: none; }
+  }
 }
 
 * {
