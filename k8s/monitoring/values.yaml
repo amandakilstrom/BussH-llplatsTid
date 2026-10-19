@@ -1,0 +1,68 @@
+# kube-prometheus-stack för k3s på homelab (en nod)
+# Installeras med: helm upgrade --install monitoring prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+
+# k3s kör kontrollplanet inbäddat i en process, så de här går inte att skrapa
+# separat och skulle bara synas som "down" och ge falska larm.
+kubeEtcd:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
+
+# Inga larm-mejl än, spara resurser.
+alertmanager:
+  enabled: false
+
+prometheus:
+  prometheusSpec:
+    retention: 15d
+    retentionSize: 8GB
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path   # följer med k3s
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+    # Pi:n är inte en k3s-nod, så den skrapas direkt via sin node-exporter.
+    # job_name node-exporter gör att Pi:n syns i de färdiga node-dashboards
+    # som följer med, sida vid sida med homelab.
+    additionalScrapeConfigs:
+      - job_name: node-exporter
+        static_configs:
+          - targets: ["192.168.50.111:9100"]     # byt PI_IP mot Pi:ns IP-adress
+            labels:
+              instance: infomonitor
+
+grafana:
+  admin:
+    existingSecret: grafana-admin      # skapas med kubectl innan installationen
+    userKey: admin-user
+    passwordKey: admin-password
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 2Gi
+  service:
+    type: LoadBalancer
+    port: 3000                         # 8080 är redan upptagen av bussappen
+  grafana.ini:
+    server:
+      root_url: http://192.168.50.211:3000
+    security:
+      allow_embedding: true            # så att flik-skalet kan visa Grafana i en iframe
+    auth.anonymous:
+      enabled: true                    # kiosken ska inte behöva logga in
+      org_role: Viewer
+    users:
+      default_theme: dark
